@@ -119,30 +119,6 @@ if menu_id == 'Home':
 
             st.markdown('<img align="right" alt="code"  height="500" width="300" src = "https://github.com/MoinDalvs/Resume_Parser_and_Classification/blob/main/Images/Scroll_down.gif?raw=true">', unsafe_allow_html=True)
             
-   
-\
-<div style="align:center;\
-            display:fill;\
-            border-radius: false;\
-            border-style: solid;\
-            border-color:#000000;\
-            border-style: false;\
-            border-width: 2px;\
-            color:#CF673A;\
-            font-size:15px;\
-            font-family: Georgia;\
-            background-color:#E8DCCC;\
-            text-align:center;\
-            letter-spacing:0.1px;\
-            padding: 0.1em;">\
-\
-**<h2>♡ Thank you for taking the time ♡**', unsafe_allow_html=True)
-
-            st.markdown('<img align="right" alt="code"  height="200" width="200" src = "https://static.wixstatic.com/media/15e6c3_8f8cac375de143dc9d1d552090d975cf~mv2.gif">', unsafe_allow_html=True)
-
-        with col2:
-
-            st.markdown('<img align="right" alt="code"  height="500" width="300" src = "https://github.com/MoinDalvs/Resume_Parser_and_Classification/blob/main/Images/Scroll_down.gif?raw=true">', unsafe_allow_html=True)
 
 def extract_text_from_docx(docx_path):
 
