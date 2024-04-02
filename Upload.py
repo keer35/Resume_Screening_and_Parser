@@ -863,20 +863,20 @@ if menu_id == 'Resume Parser':
                st.subheader('Email: ' + str(df['Email'][0]))
                st.subheader('Contact: ' + str(df['Mobile No.'][0]))
                st.subheader('Date of Birth: ' + str(df['DOB'][0]))
-          except:
+           except:
               pass
 
-          expander = st.expander("See Resume")
-          expander.write(displayed)    
+           expander = st.expander("See Resume")
+           expander.write(displayed)    
 
         with col2:
-            st.header("**Skills Analysis💡**")
+           st.header("**Skills Analysis💡**")
     ## shows skill
-            keywords = st_tags(label='### Skills that'+ df['Name'][0] + ' have',
-            text=' -- Skills',value=df['Skills'][0],key = '1')
+           keywords = st_tags(label='### Skills that'+ df['Name'][0] + ' have',
+           text=' -- Skills',value=df['Skills'][0],key = '1')
 
-            st.subheader("**Competence Score📝**")
-            st.markdown(
+           st.subheader("**Competence Score📝**")
+           st.markdown(
                    """
                     <style>
                         .stProgress > div > div > div > div {
@@ -885,9 +885,9 @@ if menu_id == 'Resume Parser':
                     </style>""",
                     unsafe_allow_html=True,
                      )   
-            my_bar = st.progress(0)
-            score = 0
-            if df['competence score'][0] != 'NA':
+           my_bar = st.progress(0)
+           score = 0
+           if df['competence score'][0] != 'NA':
                for percent_complete in range(int(df['competence score'][0])):
                 score +=1
                 time.sleep(0.1)
