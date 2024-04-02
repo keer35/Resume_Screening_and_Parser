@@ -814,7 +814,60 @@ if menu_id == 'Resume Parser':
 
     df = pd.DataFrame(columns=['Name','Mobile No.', 'Email','DOB','Education Qualifications','Skills','Experience (Years)','Last Position','Competence','competence score'], dtype=object)
 
+    import streamlit as st
+import PyPDF2
+import pandas as pd
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+
+# Define functions for extracting text from PDF and generating PDF
+def extract_text_from_pdf(pdf_path):
+    """
+    Extracts text from a PDF file.
     
+    Parameters:
+    pdf_path (str): Path to the PDF file.
+    
+    Returns:
+    str: Extracted text from the PDF.
+    """
+    with open(pdf_path, 'rb') as file:
+        reader = PyPDF2.PdfFileReader(file)
+        text = ''
+        for page_num in range(reader.numPages):
+            page = reader.getPage(page_num)
+            text += page.extractText()
+    return text
+
+def generate_pdf(text, pdf_path):
+    """
+    Generates a PDF file from the extracted text.
+    
+    Parameters:
+    text (str): Extracted text.
+    pdf_path (str): Path to save the PDF file.
+    """
+    c = canvas.Canvas(pdf_path, pagesize=letter)
+    c.drawString(100, 750, text)  # Adjust the position as needed
+    c.save()
+
+# Streamlit interface
+st.title("PDF Text Extractor")
+
+# Upload PDF file
+pdf_file = st.file_uploader("Upload PDF file", type="pdf")
+
+if pdf_file is not None:
+    # Extract text from PDF
+    extracted_text = extract_text_from_pdf(pdf_file)
+
+    # Display extracted text
+    st.write("Extracted Text:")
+    st.write(extracted_text)
+
+    # Generate and download PDF
+    download_button = st.download_button(label="Download PDF", data=extracted_text, file_name="extracted_text.pdf", mime="application/pdf")
+
     st.title("RESUME PARSER")
         
     st.subheader('Upload Resume (Single File Accepted) 👇')
