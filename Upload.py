@@ -858,7 +858,7 @@ def generate_resume_analysis_pdf(df):
 
         with col1:
 
-    st.header("Basic info")
+        st.header("Basic info")
     try:        
         st.subheader('Name: '+ df['Name'][0])
         st.subheader('Experience (Years): ' + str(df['Experience (Years)'][0]))
