@@ -20,4 +20,3 @@ spacy
 streamlit
 streamlit_tags
 pdfkit
-pdftotext
