@@ -1,8 +1,3 @@
-
-
-# In[4]:
-
-
 import os
 import re
 import sys
@@ -28,7 +23,8 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import pdfkit
 import os
-
+import pdftotext
+import pdfkit
 
 import matplotlib.pyplot  as plt
 import hydralit_components as hc
@@ -816,7 +812,11 @@ if menu_id == 'Resume Parser':
             return txt.replace('\t', ' ')
 
     df = pd.DataFrame(columns=['Name','Mobile No.', 'Email','DOB','Education Qualifications','Skills','Experience (Years)','Last Position','Competence','competence score'], dtype=object)
-
+def generate_resume_analysis_pdf(df):
+    html = df.to_html()
+    with open("resume_analysis.html", "w") as f:
+        f.write(html)
+    pdfkit.from_file("resume_analysis.html", "resume_analysis.pdf")
     
     st.title("RESUME PARSER")
         
@@ -898,57 +898,8 @@ if menu_id == 'Resume Parser':
                     time.sleep(0.1)
                     my_bar.progress(percent_complete + 1)
                 st.success(df['Name'][0] + "'s Competence Score: " + str(score))
-
+           if st.button("Generate PDF"):
+                 generate_resume_analysis_pdf(df)
+                 st.success("PDF has been generated successfully! You can download it using the link below.")
+                 st.markdown("[Download PDF](./resume_analysis.pdf)")
             df.T
-
-
-# In[3]:
-
-
-import streamlit as st
-import pdfkit
-import os
-def generate_resume_pdf(parsed_info, classification_info, output_path):
-    # Generate HTML content for the PDF
-    html_content = f"""
-    <html>
-    <head><title>Resume Information</title></head>
-    <body>
-        <h1>Parsed Resume Information</h1>
-        <p>{parsed_info}</p>
-        <h1>Resume Classification Information</h1>
-        <p>{classification_info}</p>
-    </body>
-    </html>
-    """
-
-    # Save HTML content to a temporary file
-    temp_html_file = "temp_resume_info.html"
-    with open(temp_html_file, "w") as html_file:
-        html_file.write(html_content)
-
-    # Convert HTML to PDF using pdfkit
-    pdfkit.from_file(temp_html_file, output_path, configuration=pdfkit.configuration(wkhtmltopdf='/path/to/wkhtmltopdf'))
-
-
-    # Remove temporary HTML file
-    os.remove(temp_html_file)
-
-# UI elements to input parsed info and classification info
-parsed_info = st.text_area("Parsed Resume Information")
-classification_info = st.text_area("Resume Classification Information")
-
-# Button to trigger PDF generation and download
-if st.button("Download Resume Information as PDF"):
-    output_path = "resume_info.pdf"  # Specify output path
-    generate_resume_pdf(parsed_info, classification_info, output_path)
-    st.success("Resume information PDF generated and downloaded successfully!")
-    # Provide download link for the generated PDF
-    st.markdown(f'<a href="{output_path}" download>Download Resume Information PDF</a>', unsafe_allow_html=True)
-
-
-# In[ ]:
-
-
-
-
