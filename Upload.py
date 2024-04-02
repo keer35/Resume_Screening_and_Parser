@@ -812,12 +812,7 @@ if menu_id == 'Resume Parser':
             return txt.replace('\t', ' ')
 
     df = pd.DataFrame(columns=['Name','Mobile No.', 'Email','DOB','Education Qualifications','Skills','Experience (Years)','Last Position','Competence','competence score'], dtype=object)
-def generate_resume_analysis_pdf(df):
-    html = df.to_html()
-    with open("resume_analysis.html", "w") as f:
-        f.write(html)
-    pdfkit.from_file("resume_analysis.html", "resume_analysis.pdf")
-    
+  
     st.title("RESUME PARSER")
         
     st.subheader('Upload Resume (Single File Accepted) 👇')
@@ -858,53 +853,53 @@ def generate_resume_analysis_pdf(df):
 
         with col1:
 
-        st.header("Basic info")
-    try:        
-        st.subheader('Name: '+ df['Name'][0])
-        st.subheader('Experience (Years): ' + str(df['Experience (Years)'][0]))
-        st.subheader('Last Position: ' + str(df['Last Position'][0]))
-        st.subheader('Competence: ' + str(df['Competence'][0]))
-        st.subheader('Education: ' + str(df['Education Qualifications'][0]))
-        st.subheader('Email: ' + str(df['Email'][0]))
-        st.subheader('Contact: ' + str(df['Mobile No.'][0]))
-        st.subheader('Date of Birth: ' + str(df['DOB'][0]))
-    except:
-        pass
+           st.header("Basic info")
+          try:        
+               st.subheader('Name: '+ df['Name'][0])
+               st.subheader('Experience (Years): ' + str(df['Experience (Years)'][0]))
+               st.subheader('Last Position: ' + str(df['Last Position'][0]))
+               st.subheader('Competence: ' + str(df['Competence'][0]))
+               st.subheader('Education: ' + str(df['Education Qualifications'][0]))
+               st.subheader('Email: ' + str(df['Email'][0]))
+               st.subheader('Contact: ' + str(df['Mobile No.'][0]))
+               st.subheader('Date of Birth: ' + str(df['DOB'][0]))
+          except:
+              pass
 
-    expander = st.expander("See Resume")
-    expander.write(displayed)    
+          expander = st.expander("See Resume")
+          expander.write(displayed)    
 
-with col2:
-    st.header("**Skills Analysis💡**")
+        with col2:
+            st.header("**Skills Analysis💡**")
     ## shows skill
-    keywords = st_tags(label='### Skills that'+ df['Name'][0] + ' have',
-    text=' -- Skills',value=df['Skills'][0],key = '1')
+            keywords = st_tags(label='### Skills that'+ df['Name'][0] + ' have',
+            text=' -- Skills',value=df['Skills'][0],key = '1')
 
-    st.subheader("**Competence Score📝**")
-    st.markdown(
-                """
-                <style>
-                    .stProgress > div > div > div > div {
-                        background-color: #d73b5c;
-                    }
-                </style>""",
-                unsafe_allow_html=True,
-            )
-    my_bar = st.progress(0)
-    score = 0
-    if df['competence score'][0] != 'NA':
-        for percent_complete in range(int(df['competence score'][0])):
-            score +=1
-            time.sleep(0.1)
-            my_bar.progress(percent_complete + 1)
-        st.success(df['Name'][0] + "'s Competence Score: " + str(score))
+            st.subheader("**Competence Score📝**")
+            st.markdown(
+                   """
+                    <style>
+                        .stProgress > div > div > div > div {
+                            background-color: #d73b5c;
+                         }
+                    </style>""",
+                    unsafe_allow_html=True,
+                     )   
+            my_bar = st.progress(0)
+            score = 0
+            if df['competence score'][0] != 'NA':
+               for percent_complete in range(int(df['competence score'][0])):
+                score +=1
+                time.sleep(0.1)
+                my_bar.progress(percent_complete + 1)
+               st.success(df['Name'][0] + "'s Competence Score: " + str(score))
 
     # Generate PDF and download button
-    if st.button("Generate PDF"):
-        generate_resume_analysis_pdf(df)
-        st.success("PDF has been generated successfully! You can download it using the link below.")
-        st.markdown("[Download PDF](./resume_analysis.pdf)")
-    else:
-        st.info("Upload a resume file to begin analysis.")
+           if st.button("Generate PDF"):
+               generate_resume_analysis_pdf(df)
+               st.success("PDF has been generated successfully! You can download it using the link below.")
+               st.markdown("[Download PDF](./resume_analysis.pdf)")
+           else:
+            st.info("Upload a resume file to begin analysis.")
 
 df.T  # Make sure this line is not indented
