@@ -900,7 +900,7 @@ if menu_id == 'Resume Parser':
              # After populating the DataFrame with extracted information
             df.to_csv('resume_data.csv', index=False)
                    # After populating the DataFrame with extracted information
-                st.download_button(label='Download CSV', data=df.to_csv().encode('utf-8'), file_name='resume_data.csv', mime='text/csv')
+                 st.download_button(label='Download CSV', data=df.to_csv().encode('utf-8'), file_name='resume_data.csv', mime='text/csv')
 
 
 
