@@ -854,7 +854,7 @@ if menu_id == 'Resume Parser':
         with col1:
 
            st.header("Basic info")
-          try:        
+           try:        
                st.subheader('Name: '+ df['Name'][0])
                st.subheader('Experience (Years): ' + str(df['Experience (Years)'][0]))
                st.subheader('Last Position: ' + str(df['Last Position'][0]))
