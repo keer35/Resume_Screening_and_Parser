@@ -901,8 +901,8 @@ def generate_resume_analysis_pdf(df):
           # Generate PDF and download button
             if st.button("Generate PDF"):
                generate_resume_analysis_pdf(df)
-                st.success("PDF has been generated successfully! You can download it using the link below.")
-                st.markdown("[Download PDF](./resume_analysis.pdf)")
+                 st.success("PDF has been generated successfully! You can download it using the link below.")
+                 st.markdown("[Download PDF](./resume_analysis.pdf)")
             else:
-                st.info("Upload a resume file to begin analysis.")
+                 st.info("Upload a resume file to begin analysis.")
      df.T
