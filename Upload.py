@@ -898,8 +898,11 @@ def generate_resume_analysis_pdf(df):
                     time.sleep(0.1)
                     my_bar.progress(percent_complete + 1)
                 st.success(df['Name'][0] + "'s Competence Score: " + str(score))
-           if st.button("Generate PDF"):
-                 generate_resume_analysis_pdf(df)
-                 st.success("PDF has been generated successfully! You can download it using the link below.")
-                 st.markdown("[Download PDF](./resume_analysis.pdf)")
+          # Generate PDF and download button
+        if st.button("Generate PDF"):
+            generate_resume_analysis_pdf(df)
+            st.success("PDF has been generated successfully! You can download it using the link below.")
+            st.markdown("[Download PDF](./resume_analysis.pdf)")
+    else:
+        st.info("Upload a resume file to begin analysis.")
             df.T
