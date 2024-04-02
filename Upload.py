@@ -928,7 +928,8 @@ def generate_resume_pdf(parsed_info, classification_info, output_path):
         html_file.write(html_content)
 
     # Convert HTML to PDF using pdfkit
-    pdfkit.from_file(temp_html_file, output_path)
+    pdfkit.from_file(temp_html_file, output_path, configuration=pdfkit.configuration(wkhtmltopdf='/path/to/wkhtmltopdf'))
+
 
     # Remove temporary HTML file
     os.remove(temp_html_file)
