@@ -68,8 +68,6 @@ model1 = load(mfile1)
 
 
 st.set_page_config(layout='wide',initial_sidebar_state='collapsed')
-
-# specify the primary menu definition
 import streamlit as st
 
 # Define the menu_data
@@ -86,7 +84,7 @@ def nav_bar():
     st.markdown("# Navigation")
     for item in menu_data:
         st.write(f"Icon: {item['icon']}, Label: {item['label']}")
-    if st.sidebar.checkbox("Change Theme"):
+    if st.button("Settings"):
         theme_color = st.sidebar.selectbox("Select Theme Color", ["Light", "Dark"])
         if theme_color == "Light":
             st.set_page_config(layout='wide', initial_sidebar_state='collapsed', theme="light")
@@ -95,10 +93,6 @@ def nav_bar():
 
 # Render the navigation bar
 nav_bar()
-
-
-
-# In[8]:
 
 
 import streamlit as st
