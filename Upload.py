@@ -91,31 +91,10 @@ menu_id = hc.nav_bar(
 def change_theme(theme):
     if theme == "Light":
         st.write("Changing theme to Light")
-        st.markdown(
-            """
-            <style>
-            body {
-                background-color: #F0F2F6;
-                color: #333333;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
+        st.set_theme('light')
     elif theme == "Dark":
         st.write("Changing theme to Dark")
-        st.markdown(
-            """
-            <style>
-            body {
-                background-color: #333333;
-                color: #F0F2F6;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True
-        )
-
+        st.set_theme('dark')
 # Add a button to change the theme
 if st.button("Change Theme"):
     selected_theme = st.radio("Select Theme", ["Light", "Dark"])
