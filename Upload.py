@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[4]:
-
-
 import os
 import re
 import sys
@@ -12,7 +6,6 @@ import nltk
 import spacy
 import sklearn
 import datetime
-
 import requests
 import docx2txt
 import numpy as np
@@ -77,23 +70,32 @@ model1 = load(mfile1)
 st.set_page_config(layout='wide',initial_sidebar_state='collapsed')
 
 # specify the primary menu definition
+import streamlit as st
+
+# Define the menu_data
 menu_data = [
-    {'icon': "fa fa-address-card", 'label':"Resume Parser"},
-    {'icon': "far fa-file-word", 'label':"Resume Classification"},
-    {'icon':"fa fa-check-square",'label':"Model Evaluation"},
-    {'icon': "far fa-chart-bar", 'label':"Data Analysis"},#no tooltip message
+    {'icon': "fa fa-address-card", 'label': "Resume Parser"},
+    {'icon': "far fa-file-word", 'label': "Resume Classification"},
+    {'icon': "fa fa-check-square", 'label': "Model Evaluation"},
+    {'icon': "far fa-chart-bar", 'label': "Data Analysis"},  # no tooltip message
+    {'icon': "fas fa-cogs", 'label': "Settings"},  # additional icon
 ]
 
-over_theme = {'txc_inactive': '#FFFFFF'}
-menu_id = hc.nav_bar(
-    menu_definition=menu_data,
-    override_theme=over_theme,
-    home_name='Home',
-    login_name=None,
-    hide_streamlit_markers=False, #will show the st hamburger as well as the navbar now!
-    sticky_nav=True, #at the top or not
-    sticky_mode='pinned', #jumpy or not-jumpy, but sticky or pinned
-)
+# Define the navigation bar
+def nav_bar():
+    st.markdown("# Navigation")
+    for item in menu_data:
+        st.write(f"Icon: {item['icon']}, Label: {item['label']}")
+    if st.sidebar.checkbox("Change Theme"):
+        theme_color = st.sidebar.selectbox("Select Theme Color", ["Light", "Dark"])
+        if theme_color == "Light":
+            st.set_page_config(layout='wide', initial_sidebar_state='collapsed', theme="light")
+        elif theme_color == "Dark":
+            st.set_page_config(layout='wide', initial_sidebar_state='collapsed', theme="dark")
+
+# Render the navigation bar
+nav_bar()
+
 
 
 # In[8]:
