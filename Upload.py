@@ -67,32 +67,61 @@ model1 = load(mfile1)
 # In[7]:
 
 
-st.set_page_config(layout='wide',initial_sidebar_state='collapsed')
-import streamlit as st
+st.set_page_config(layout='wide', initial_sidebar_state='collapsed')
 
-# Define the menu_data
+# specify the primary menu definition
 menu_data = [
     {'icon': "fa fa-address-card", 'label': "Resume Parser"},
     {'icon': "far fa-file-word", 'label': "Resume Classification"},
     {'icon': "fa fa-check-square", 'label': "Model Evaluation"},
     {'icon': "far fa-chart-bar", 'label': "Data Analysis"},  # no tooltip message
-    {'icon': "fas fa-cogs", 'label': "Settings"},  # additional icon
 ]
 
-# Define the navigation bar
-def nav_bar():
-    st.markdown("# Navigation")
-    for item in menu_data:
-        st.write(f"Icon: {item['icon']}, Label: {item['label']}")
-    if st.button("Settings"):
-        theme_color = st.sidebar.selectbox("Select Theme Color", ["Light", "Dark"])
-        if theme_color == "Light":
-            st.set_page_config(layout='wide', initial_sidebar_state='collapsed', theme="light")
-        elif theme_color == "Dark":
-            st.set_page_config(layout='wide', initial_sidebar_state='collapsed', theme="dark")
+over_theme = {'txc_inactive': '#FFFFFF'}
+menu_id = hc.nav_bar(
+    menu_definition=menu_data,
+    override_theme=over_theme,
+    home_name='Home',
+    login_name=None,
+    hide_streamlit_markers=False,  # will show the st hamburger as well as the navbar now!
+    sticky_nav=True,  # at the top or not
+    sticky_mode='pinned',  # jumpy or not-jumpy, but sticky or pinned
+)
 
-# Render the navigation bar
-nav_bar()
+def change_theme(theme):
+    if theme == "Light":
+        st.write("Changing theme to Light")
+        st.markdown(
+            """
+            <style>
+            body {
+                background-color: #F0F2F6;
+                color: #333333;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+    elif theme == "Dark":
+        st.write("Changing theme to Dark")
+        st.markdown(
+            """
+            <style>
+            body {
+                background-color: #333333;
+                color: #F0F2F6;
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
+# Add a button to change the theme
+if st.button("Change Theme"):
+    selected_theme = st.radio("Select Theme", ["Light", "Dark"])
+    change_theme(selected_theme)
+
+# Placeholder for the rest of your Streamlit app logic
 
 
 import streamlit as st
