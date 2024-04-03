@@ -88,6 +88,9 @@ menu_id = hc.nav_bar(
     sticky_mode='pinned',  # jumpy or not-jumpy, but sticky or pinned
 )
 
+import streamlit as st
+
+# Function to change the theme
 def change_theme(theme):
     if theme == "Light":
         st.write("Changing theme to Light")
@@ -102,8 +105,8 @@ def set_light_theme():
         """
         <style>
         body {
-            background-color: #FFFFFF;
-            color: #333333;
+            background-color: #FFFFFF !important;
+            color: #333333 !important;
         }
         </style>
         """,
@@ -116,8 +119,8 @@ def set_dark_theme():
         """
         <style>
         body {
-            background-color: #333333;
-            color: #FFFFFF;
+            background-color: #333333 !important;
+            color: #FFFFFF !important;
         }
         </style>
         """,
@@ -128,6 +131,8 @@ def set_dark_theme():
 if st.button("Change Theme"):
     selected_theme = st.radio("Select Theme", ["Light", "Dark"])
     change_theme(selected_theme)
+
+# Placeholder for the rest of your Streamlit app logic
 
 # Placeholder for the rest of your Streamlit app logic
 
